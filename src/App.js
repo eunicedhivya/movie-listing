@@ -72,11 +72,11 @@ function App() {
   const [moviePlot, setMoviePlot] = useState("");
   const [movieimg, setMovieimg] = useState("");
 
-  function addMovieToList() {
-    let movieItem = {
-      movieName
-    }
-  }
+  // function addMovieToList() {
+  //   let movieItem = {
+  //     movieName
+  //   }
+  // }
   return (
     <div className="App">
       <h1>Movie Listing</h1>
@@ -87,7 +87,7 @@ function App() {
         <input type="text" id="movieplot" onChange={(e) => setMoviePlot(e.target.value)} /> <br />
         <input type="text" id="movieimg" onChange={(e) => setMovieimg(e.target.value)} /> <br />
         <button onClick={(e) => {
-          addMovieToList()
+          // addMovieToList()
         }}>add Book</button>
       </div>
       <div className="movie-list">
