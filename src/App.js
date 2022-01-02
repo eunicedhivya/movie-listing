@@ -9,8 +9,6 @@ function App() {
       title: "Harry Potter and the Sorcerer's Stone",
       year: "2001",
       rating: 5,
-      genres: ["Comedy", "Fantasy"],
-      director: "Tim Burton",
       plot:
         'A couple of recently deceased ghosts contract the services of a "bio-exorcist" in order to remove the obnoxious new owners of their house.',
       posterUrl:
@@ -21,8 +19,6 @@ function App() {
       title: "The Cotton Club",
       year: "1984",
       rating: 3,
-      genres: ["Crime", "Drama", "Music"],
-      director: "Francis Ford Coppola",
       plot:
         "The Cotton Club was a famous night club in Harlem. The story follows the people that visited the club, those that ran it, and is peppered with the Jazz music that made it so famous.",
       posterUrl:
@@ -33,8 +29,6 @@ function App() {
       title: "The Shawshank Redemption",
       year: "1994",
       rating: 5,
-      genres: ["Crime", "Drama"],
-      director: "Frank Darabont",
       plot:
         "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
       posterUrl:
@@ -45,8 +39,6 @@ function App() {
       title: "Crocodile Dundee",
       year: "1986",
       rating: 3,
-      genres: ["Adventure", "Comedy"],
-      director: "Peter Faiman",
       plot:
         "An American reporter goes to the Australian outback to meet an eccentric crocodile poacher and invites him to New York City.",
       posterUrl:
@@ -57,41 +49,44 @@ function App() {
       title: "Valkyrie",
       year: "2008",
       rating: 4,
-      genres: ["Drama", "History", "Thriller"],
-      director: "Bryan Singer",
       plot:
         "A dramatization of the 20 July assassination and political coup plot by desperate renegade German Army officers against Hitler during World War II.",
       posterUrl:
         "http://ia.media-imdb.com/images/M/MV5BMTg3Njc2ODEyN15BMl5BanBnXkFtZTcwNTAwMzc3NA@@._V1_SX300.jpg"
     }
   ];
-  const [movieList, setMovieList] = useState("");
   const [movieTitle, setMovieTitle] = useState("");
   const [movieRating, setMovieRating] = useState("");
   const [movieYear, setMovieYear] = useState("");
   const [moviePlot, setMoviePlot] = useState("");
   const [movieimg, setMovieimg] = useState("");
 
-  // function addMovieToList() {
-  //   let movieItem = {
-  //     movieName
-  //   }
-  // }
+  const [movieList, setMovieList] = useState(movies);
+
   return (
     <div className="App">
       <h1>Movie Listing</h1>
       <div className='form'>
-        <input type="text" id="moviename" onChange={(e) => setMovieTitle(e.target.value)} /> <br />
-        <input type="text" id="movierating" onChange={(e) => setMovieRating(e.target.value)} /> <br />
-        <input type="text" id="movieyear" onChange={(e) => setMovieYear(e.target.value)} /> <br />
-        <input type="text" id="movieplot" onChange={(e) => setMoviePlot(e.target.value)} /> <br />
-        <input type="text" id="movieimg" onChange={(e) => setMovieimg(e.target.value)} /> <br />
+        <input type="text" placeholder='Name' value={movieTitle} onChange={(e) => setMovieTitle(e.target.value)} /> <br />
+        <input type="text" placeholder='Rating' value={movieRating} onChange={(e) => setMovieRating(e.target.value)} /> <br />
+        <input type="text" placeholder='Year' value={movieYear} onChange={(e) => setMovieYear(e.target.value)} /> <br />
+        <input type="text" placeholder='Plot' value={moviePlot} onChange={(e) => setMoviePlot(e.target.value)} /> <br />
+        <input type="text" placeholder='Poster' value={movieimg} onChange={(e) => setMovieimg(e.target.value)} /> <br />
         <button onClick={(e) => {
-          // addMovieToList()
-        }}>add Book</button>
+          let newMovie = {
+            id: movieList.length + 1,
+            title: movieTitle,
+            year: movieYear,
+            rating: movieRating,
+            plot: moviePlot,
+            posterUrl: movieimg
+          }
+          setMovieList([...movieList, newMovie])
+          console.log(movieList);
+        }}>add Movie</button>
       </div>
       <div className="movie-list">
-        {movies.map(function (movie, id) {
+        {movieList.map(function (movie, id) {
           return (
             <MovieItem
               key={id}
