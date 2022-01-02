@@ -1,38 +1,71 @@
 .App {
+  font-family: sans-serif;
   text-align: center;
+  font-family: "Poppins", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-size: 2em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.movie-list {
+  display: grid;
+  column-gap: 20px;
+  grid-template-columns: 50% 50%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.movie-list-item {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 20px;
+  align-items: flex-start;
+  /* width: 100%; */
+  padding: 10px;
+  border: 1px solid #ccc;
 }
 
-.App-link {
-  color: #61dafb;
+.movie-list-item img {
+  width: 100px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.movie-list-item .movie-details {
+  color: #000;
+  text-align: left;
+  padding: 0 10px;
+}
+
+.movie-list-item .movie-details h2 {
+  margin: 0 0 20px 0;
+}
+
+.movie-list-item .movie-details p {
+  margin: 20px 0 0 0;
+}
+
+.movie-list-item .movie-details ul {
+  padding: 0;
+  list-style: none;
+}
+
+.movie-list-item .movie-details ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .movie-list {
+    grid-template-columns: 100%;
   }
-  to {
-    transform: rotate(360deg);
+  .movie-list-item {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .movie-list {
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    column-gap: 20px;
+  }
+  .movie-list-item {
+    width: 100%;
   }
 }
