@@ -1,6 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Icon from '@mui/material/Icon';
+
+
 
 function App() {
   let movies = [
@@ -22,7 +27,7 @@ function App() {
       plot:
         "The Cotton Club was a famous night club in Harlem. The story follows the people that visited the club, those that ran it, and is peppered with the Jazz music that made it so famous.",
       posterUrl:
-        "https://images-na.ssl-images-amazon.com/images/M/MV5BMTU5ODAyNzA4OV5BMl5BanBnXkFtZTcwNzYwNTIzNA@@._V1_SX300.jpg"
+        "https://movieposters2.com/images/669657-b.jpg"
     },
     {
       id: 3,
@@ -52,7 +57,7 @@ function App() {
       plot:
         "A dramatization of the 20 July assassination and political coup plot by desperate renegade German Army officers against Hitler during World War II.",
       posterUrl:
-        "http://ia.media-imdb.com/images/M/MV5BMTg3Njc2ODEyN15BMl5BanBnXkFtZTcwNTAwMzc3NA@@._V1_SX300.jpg"
+        "https://movieposters2.com/images/659675-b.jpg"
     }
   ];
   const [movieTitle, setMovieTitle] = useState("");
@@ -63,10 +68,69 @@ function App() {
 
   const [movieList, setMovieList] = useState(movies);
 
+
+
   return (
     <div className="App">
       <h1>Movie Listing</h1>
-      <div className='form'>
+      <section className='form-section'>
+        <div className='forms'>
+          <TextField label="Name" variant="outlined" type="text" placeholder='Name' value={movieTitle} onChange={(e) => setMovieTitle(e.target.value)} />
+          <TextField label="Rating" variant="outlined" type="text" placeholder='Rating' value={movieRating} onChange={(e) => setMovieRating(e.target.value)} />
+          <TextField label="Year" variant="outlined" type="text" placeholder='Year' value={movieYear} onChange={(e) => setMovieYear(e.target.value)} />
+        </div>
+        <div className='forms'>
+          <TextField label="Plot" variant="outlined" type="text" placeholder='Plot' value={moviePlot} onChange={(e) => setMoviePlot(e.target.value)} />
+          <TextField label="Poster" variant="outlined" type="text" placeholder='Poster' value={movieimg} onChange={(e) => setMovieimg(e.target.value)} />
+        </div>
+        {/* <input type="text" placeholder='Name' value={movieTitle} onChange={(e) => setMovieTitle(e.target.value)} /> <br />
+        <input type="text" placeholder='Rating' value={movieRating} onChange={(e) => setMovieRating(e.target.value)} /> <br />
+        <input type="text" placeholder='Year' value={movieYear} onChange={(e) => setMovieYear(e.target.value)} /> <br />
+        <input type="text" placeholder='Plot' value={moviePlot} onChange={(e) => setMoviePlot(e.target.value)} /> <br />
+        <input type="text" placeholder='Poster' value={movieimg} onChange={(e) => setMovieimg(e.target.value)} /> <br /> */}
+        {/* <button onClick={(e) => {
+          let newMovie = {
+            id: movieList.length + 1,
+            title: movieTitle,
+            year: movieYear,
+            rating: movieRating,
+            plot: moviePlot,
+            posterUrl: movieimg
+          }
+          setMovieList([...movieList, newMovie])
+          console.log(movieList);
+        }}>add Movie</button> */}
+        <br />
+        <Button variant="contained" onClick={(e) => {
+          let newMovie = {
+            id: movieList.length + 1,
+            title: movieTitle,
+            year: movieYear,
+            rating: movieRating,
+            plot: moviePlot,
+            posterUrl: movieimg
+          }
+          setMovieList([...movieList, newMovie])
+          console.log(movieList);
+        }}>Add Movie</Button>
+      </section>
+      <div className='cardlist'>
+
+        {movieList.map(function (movie) {
+          return (
+            <Card
+              key={movie.id}
+              name={movie.title}
+              rating={movie.rating}
+              year={movie.year}
+              plot={movie.plot}
+              img={movie.posterUrl}
+            />
+          );
+        })}
+
+      </div>
+      {/* <div className='form'>
         <input type="text" placeholder='Name' value={movieTitle} onChange={(e) => setMovieTitle(e.target.value)} /> <br />
         <input type="text" placeholder='Rating' value={movieRating} onChange={(e) => setMovieRating(e.target.value)} /> <br />
         <input type="text" placeholder='Year' value={movieYear} onChange={(e) => setMovieYear(e.target.value)} /> <br />
@@ -98,9 +162,38 @@ function App() {
             />
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
+}
+
+function Card({ name, rating, year, plot, img }) {
+  const [isDescriptionOn, setDescription] = useState(false)
+
+  return (
+    <div className='card'>
+      <img src={img} />
+      <div className='details'>
+        <h2>{name}</h2>
+        <div className="metadata">
+          <ul>
+            <li className="rating">Rating: <Icon>star</Icon>{rating}</li>
+            <li className="year">Year: {year}</li>
+          </ul>
+        </div>
+        <Button variant="text" onClick={(e) => {
+          if (isDescriptionOn === true) {
+            setDescription(false)
+          } else {
+            setDescription(true)
+          }
+        }}><span>{isDescriptionOn ? '-' : '+'}</span> Toggle Description</Button>
+        <p className='plot' style={{ display: isDescriptionOn ? 'block' : 'none' }}>
+          {plot}
+        </p>
+      </div>
+    </div>
+  )
 }
 
 function MovieItem({ name, rating, year, plot, img }) {
@@ -111,7 +204,7 @@ function MovieItem({ name, rating, year, plot, img }) {
         <h2>{name}</h2>
         <div className="metadata">
           <ul>
-            <li className="rating">Rating: ⭐ {rating}</li>
+            <li className="rating">Rating: ⭐ 9</li>
             <li className="year">Year: {year}</li>
           </ul>
         </div>

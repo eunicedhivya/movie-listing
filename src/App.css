@@ -1,12 +1,110 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
   font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
 }
 
 h1 {
-  font-size: 2em;
+      font-size: 3em;
+    font-weight: 100;
+    text-align: center;
+    /* margin-bottom: 50px; */
+    text-transform: uppercase;
+    /* margin-top: 50px; */
+    margin: 50px auto;
 }
+
+.form-section{
+  margin-bottom: 50px;
+}
+
+.cardlist{
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  overflow: hidden;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  box-sizing: border-box;
+}
+.cardlist .card{
+  width: 23.5%;
+  box-sizing: border-box;
+  min-height: 300px;
+  margin: 0 0 20px 0;
+  position: relative;
+  color:#fff;
+}
+.cardlist .details{
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  text-align: left;
+  padding: 15px;
+  box-sizing: border-box;
+  background: rgb(0,0,0);
+background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 80%, rgba(0,0,0,0) 100%);
+}
+
+.cardlist .details h2{
+  font-size: 20px;
+}
+
+.cardlist .details .metadata{
+  margin: 10px 0;
+}
+.cardlist .card img{
+  width: 100%;
+}
+
+.cardlist .card .metadata ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+button span{
+  font-size: 22px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.rating span{
+      font-size: 18px;
+    line-height: 25px;
+    color: #ffb101;
+}
+
+.forms{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 20px auto;
+    column-gap: 20px;
+
+      /* display: grid;
+    justify-content: space-between;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    align-items: center;
+    column-gap: 20px;
+    row-gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    align-content: center; */
+}
+
+/* .forms input{
+  width: 50%;
+} */
 
 .movie-list {
   display: grid;
@@ -51,13 +149,21 @@ h1 {
   margin-right: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .movie-list {
     grid-template-columns: 100%;
   }
   .movie-list-item {
     width: 100%;
   }
+  .cardlist{
+    padding: 0 15px;
+  }
+  .cardlist .card {
+    width: 100%;
+  }
+
+  .forms{ flex-direction: column;row-gap:20px;padding: 0 20px;}
 }
 
 @media (min-width: 1400px) {
