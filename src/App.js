@@ -3,8 +3,14 @@ import './App.css';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Icon from '@mui/material/Icon';
-
+import Card from './components/Card';
+// import Icon from '@mui/material/Icon';
+// import IconButton from '@mui/material/IconButton';
+// import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import Badge from '@mui/material/Badge';
+// import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+// import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 
 function App() {
@@ -83,23 +89,6 @@ function App() {
           <TextField label="Plot" variant="outlined" type="text" placeholder='Plot' value={moviePlot} onChange={(e) => setMoviePlot(e.target.value)} />
           <TextField label="Poster" variant="outlined" type="text" placeholder='Poster' value={movieimg} onChange={(e) => setMovieimg(e.target.value)} />
         </div>
-        {/* <input type="text" placeholder='Name' value={movieTitle} onChange={(e) => setMovieTitle(e.target.value)} /> <br />
-        <input type="text" placeholder='Rating' value={movieRating} onChange={(e) => setMovieRating(e.target.value)} /> <br />
-        <input type="text" placeholder='Year' value={movieYear} onChange={(e) => setMovieYear(e.target.value)} /> <br />
-        <input type="text" placeholder='Plot' value={moviePlot} onChange={(e) => setMoviePlot(e.target.value)} /> <br />
-        <input type="text" placeholder='Poster' value={movieimg} onChange={(e) => setMovieimg(e.target.value)} /> <br /> */}
-        {/* <button onClick={(e) => {
-          let newMovie = {
-            id: movieList.length + 1,
-            title: movieTitle,
-            year: movieYear,
-            rating: movieRating,
-            plot: moviePlot,
-            posterUrl: movieimg
-          }
-          setMovieList([...movieList, newMovie])
-          console.log(movieList);
-        }}>add Movie</button> */}
         <br />
         <Button variant="contained" onClick={(e) => {
           let newMovie = {
@@ -130,89 +119,59 @@ function App() {
         })}
 
       </div>
-      {/* <div className='form'>
-        <input type="text" placeholder='Name' value={movieTitle} onChange={(e) => setMovieTitle(e.target.value)} /> <br />
-        <input type="text" placeholder='Rating' value={movieRating} onChange={(e) => setMovieRating(e.target.value)} /> <br />
-        <input type="text" placeholder='Year' value={movieYear} onChange={(e) => setMovieYear(e.target.value)} /> <br />
-        <input type="text" placeholder='Plot' value={moviePlot} onChange={(e) => setMoviePlot(e.target.value)} /> <br />
-        <input type="text" placeholder='Poster' value={movieimg} onChange={(e) => setMovieimg(e.target.value)} /> <br />
-        <button onClick={(e) => {
-          let newMovie = {
-            id: movieList.length + 1,
-            title: movieTitle,
-            year: movieYear,
-            rating: movieRating,
-            plot: moviePlot,
-            posterUrl: movieimg
-          }
-          setMovieList([...movieList, newMovie])
-          console.log(movieList);
-        }}>add Movie</button>
-      </div>
-      <div className="movie-list">
-        {movieList.map(function (movie, id) {
-          return (
-            <MovieItem
-              key={id}
-              name={movie.title}
-              rating={movie.rating}
-              year={movie.year}
-              plot={movie.plot}
-              img={movie.posterUrl}
-            />
-          );
-        })}
-      </div> */}
     </div>
   );
 }
 
-function Card({ name, rating, year, plot, img }) {
-  const [isDescriptionOn, setDescription] = useState(false)
+// function Card({ name, rating, year, plot, img }) {
+//   const [isDescriptionOn, setDescription] = useState(false)
 
-  return (
-    <div className='card'>
-      <img src={img} />
-      <div className='details'>
-        <h2>{name}</h2>
-        <div className="metadata">
-          <ul>
-            <li className="rating">Rating: <Icon>star</Icon>{rating}</li>
-            <li className="year">Year: {year}</li>
-          </ul>
-        </div>
-        <Button variant="text" onClick={(e) => {
-          if (isDescriptionOn === true) {
-            setDescription(false)
-          } else {
-            setDescription(true)
-          }
-        }}><span>{isDescriptionOn ? '-' : '+'}</span> Toggle Description</Button>
-        <p className='plot' style={{ display: isDescriptionOn ? 'block' : 'none' }}>
-          {plot}
-        </p>
-      </div>
-    </div>
-  )
-}
+//   return (
+//     <div className='card'>
+//       <img src={img} />
+//       <div className='details'>
+//         <h2>{name}</h2>
+//         <div className="metadata">
+//           <ul>
+//             <li className="rating">Rating: <Icon>star</Icon>{rating}</li>
+//             <li className="year">Year: {year}</li>
+//           </ul>
+//         </div>
+//         <div className="metadata">
+//           <ul>
+//             <li><Badge badgeContent={4} color="primary">
+//               <ThumbUpIcon className="icons" />
+//             </Badge></li>
+//             <li><Badge badgeContent={4} color="primary">
+//               <ThumbDownIcon className="icons" />
+//             </Badge></li>
+//           </ul>
+//         </div>
+//         <IconButton className="descToggle" aria-label="expand" onClick={(e) => {
+//           if (isDescriptionOn === true) {
+//             setDescription(false)
+//           } else {
+//             setDescription(true)
+//           }
+//         }}>
+//           {isDescriptionOn ? <ExpandLessIcon /> : <ExpandMoreIcon />} Toggle
+//         </IconButton>
+//         {/* <Button variant="text" onClick={(e) => {
+//           if (isDescriptionOn === true) {
+//             setDescription(false)
+//           } else {
+//             setDescription(true)
+//           }
+//         }}><span>{isDescriptionOn ? <ExpandLessIcon /> : <ExpandMoreIcon />}</span> Toggle Description</Button> */}
+//         {/* <p className='plot' style={{ display: isDescriptionOn ? 'block' : 'none' }}>
+//           {plot}
+//         </p> */}
 
-function MovieItem({ name, rating, year, plot, img }) {
-  return (
-    <div className="movie-list-item">
-      <img src={img} alt={name} />
-      <div className="movie-details">
-        <h2>{name}</h2>
-        <div className="metadata">
-          <ul>
-            <li className="rating">Rating: ⭐ 9</li>
-            <li className="year">Year: {year}</li>
-          </ul>
-        </div>
-        <p>{plot}</p>
-      </div>
-    </div>
-  );
-}
+//         {isDescriptionOn ? <p className='plot'>{plot}</p> : ""}
+//       </div>
+//     </div>
+//   )
+// }
 
 
 export default App;
