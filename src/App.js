@@ -1,6 +1,6 @@
 import './App.css';
 import { Switch, Route, Link, Redirect } from "react-router-dom";
-import { useState } from 'react';
+import { createContext, useState, useContext } from 'react';
 import Home from './pages/Home';
 import Colorbox from './pages/Colorbox';
 import Movie from './pages/Movie';
@@ -9,6 +9,7 @@ import AddMovies from "./pages/AddMovies";
 import EditMovies from "./pages/EditMovies";
 import Notfound from './pages/Notfound';
 
+const context = createContext();
 
 function App() {
 
@@ -66,10 +67,12 @@ function App() {
   ];
  
   const [movieList, setMovieList] = useState(movies);
+  const [mode, setMode] = useState("light");
 
   return (
     <div className="App">
-       <ul>
+      <context.Provider value={{mode, setMode}}>
+       <ul className='main-menu'>
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -80,10 +83,19 @@ function App() {
           <Link to="/films">Films</Link>
         </li>
         <li>
-          <Link to="/add">Add Movies</Link>
+          <Link className='addOp' to="/add">Add Movies</Link>
+        </li>
+        <li>
+          {/* <button
+            style={styles}
+            onClick={() => {
+              setMode(value === "light" ? "dark" : "light");
+            }}
+          >
+            {value}
+          </button> */}
         </li>
       </ul>
-
       <hr />
        <Switch>
         {/* Each route is case, eg. - case '/about': */}
@@ -104,7 +116,7 @@ function App() {
         <Route exact path="/"> <Home /> </Route>
         <Route path="**"> <Notfound /> </Route>
       </Switch>
-
+      </context.Provider>
     </div>
   );
 }
