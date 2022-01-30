@@ -1,19 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import { Switch, Route, Link, Redirect } from "react-router-dom";
 import { useState } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Card from './components/Card';
-// import Icon from '@mui/material/Icon';
-// import IconButton from '@mui/material/IconButton';
-// import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// import Badge from '@mui/material/Badge';
-// import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-// import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import Home from './pages/Home';
+import Colorbox from './pages/Colorbox';
+import Movie from './pages/Movie';
+import MovieDetails from './pages/MovieDetails';
+import AddMovies from "./pages/AddMovies";
+import EditMovies from "./pages/EditMovies";
+import Notfound from './pages/Notfound';
 
 
 function App() {
+
   let movies = [
     {
       id: 1,
@@ -66,112 +64,52 @@ function App() {
         "https://movieposters2.com/images/659675-b.jpg"
     }
   ];
-  const [movieTitle, setMovieTitle] = useState("");
-  const [movieRating, setMovieRating] = useState("");
-  const [movieYear, setMovieYear] = useState("");
-  const [moviePlot, setMoviePlot] = useState("");
-  const [movieimg, setMovieimg] = useState("");
-
+ 
   const [movieList, setMovieList] = useState(movies);
-
-
 
   return (
     <div className="App">
-      <h1>Movie Listing</h1>
-      <section className='form-section'>
-        <div className='forms'>
-          <TextField label="Name" variant="outlined" type="text" placeholder='Name' value={movieTitle} onChange={(e) => setMovieTitle(e.target.value)} />
-          <TextField label="Rating" variant="outlined" type="text" placeholder='Rating' value={movieRating} onChange={(e) => setMovieRating(e.target.value)} />
-          <TextField label="Year" variant="outlined" type="text" placeholder='Year' value={movieYear} onChange={(e) => setMovieYear(e.target.value)} />
-        </div>
-        <div className='forms'>
-          <TextField label="Plot" variant="outlined" type="text" placeholder='Plot' value={moviePlot} onChange={(e) => setMoviePlot(e.target.value)} />
-          <TextField label="Poster" variant="outlined" type="text" placeholder='Poster' value={movieimg} onChange={(e) => setMovieimg(e.target.value)} />
-        </div>
-        <br />
-        <Button variant="contained" onClick={(e) => {
-          let newMovie = {
-            id: movieList.length + 1,
-            title: movieTitle,
-            year: movieYear,
-            rating: movieRating,
-            plot: moviePlot,
-            posterUrl: movieimg
-          }
-          setMovieList([...movieList, newMovie])
-          console.log(movieList);
-        }}>Add Movie</Button>
-      </section>
-      <div className='cardlist'>
+       <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/movies">Movies</Link>
+        </li>
+        <li>
+          <Link to="/films">Films</Link>
+        </li>
+        <li>
+          <Link to="/add">Add Movies</Link>
+        </li>
+      </ul>
 
-        {movieList.map(function (movie) {
-          return (
-            <Card
-              key={movie.id}
-              name={movie.title}
-              rating={movie.rating}
-              year={movie.year}
-              plot={movie.plot}
-              img={movie.posterUrl}
-            />
-          );
-        })}
+      <hr />
+       <Switch>
+        {/* Each route is case, eg. - case '/about': */}
+        <Route path="/films">
+          <Redirect to="/movies" />
+        </Route>
+        <Route path="/movies/:id"> 
+          <MovieDetails movies={movieList} />
+        </Route>
+        <Route path="/add"> 
+          <AddMovies movieList={movies} setMovieList={setMovieList}/>
+        </Route>
+        <Route path="/edit/:id"> 
+          <EditMovies movieList={movies} setMovieList={setMovieList}/>
+        </Route>
+        <Route path="/movies"> <Movie movies={movieList}  setMovieList={setMovieList} /> </Route>
+        <Route path="/colorbox"> <Colorbox /> </Route>
+        <Route exact path="/"> <Home /> </Route>
+        <Route path="**"> <Notfound /> </Route>
+      </Switch>
 
-      </div>
     </div>
   );
 }
 
-// function Card({ name, rating, year, plot, img }) {
-//   const [isDescriptionOn, setDescription] = useState(false)
 
-//   return (
-//     <div className='card'>
-//       <img src={img} />
-//       <div className='details'>
-//         <h2>{name}</h2>
-//         <div className="metadata">
-//           <ul>
-//             <li className="rating">Rating: <Icon>star</Icon>{rating}</li>
-//             <li className="year">Year: {year}</li>
-//           </ul>
-//         </div>
-//         <div className="metadata">
-//           <ul>
-//             <li><Badge badgeContent={4} color="primary">
-//               <ThumbUpIcon className="icons" />
-//             </Badge></li>
-//             <li><Badge badgeContent={4} color="primary">
-//               <ThumbDownIcon className="icons" />
-//             </Badge></li>
-//           </ul>
-//         </div>
-//         <IconButton className="descToggle" aria-label="expand" onClick={(e) => {
-//           if (isDescriptionOn === true) {
-//             setDescription(false)
-//           } else {
-//             setDescription(true)
-//           }
-//         }}>
-//           {isDescriptionOn ? <ExpandLessIcon /> : <ExpandMoreIcon />} Toggle
-//         </IconButton>
-//         {/* <Button variant="text" onClick={(e) => {
-//           if (isDescriptionOn === true) {
-//             setDescription(false)
-//           } else {
-//             setDescription(true)
-//           }
-//         }}><span>{isDescriptionOn ? <ExpandLessIcon /> : <ExpandMoreIcon />}</span> Toggle Description</Button> */}
-//         {/* <p className='plot' style={{ display: isDescriptionOn ? 'block' : 'none' }}>
-//           {plot}
-//         </p> */}
-
-//         {isDescriptionOn ? <p className='plot'>{plot}</p> : ""}
-//       </div>
-//     </div>
-//   )
-// }
 
 
 export default App;
