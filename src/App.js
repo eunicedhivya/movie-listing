@@ -106,10 +106,10 @@ function App() {
           <MovieDetails movies={movieList} />
         </Route>
         <Route path="/add"> 
-          <AddMovies movieList={movies} setMovieList={setMovieList}/>
+          <AddMovies movieList={movieList} setMovieList={setMovieList}/>
         </Route>
         <Route path="/edit/:id"> 
-          <EditMovies movieList={movies} setMovieList={setMovieList}/>
+          <EditMovies movieList={movieList} setMovieList={setMovieList}/>
         </Route>
         <Route path="/movies"> <Movie movies={movieList}  setMovieList={setMovieList} /> </Route>
         <Route path="/colorbox"> <Colorbox /> </Route>

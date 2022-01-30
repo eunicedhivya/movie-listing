@@ -40,7 +40,7 @@ function EditMovies({movieList, setMovieList}){
           setMovieList(movieList)
           history.push("/movies")
 
-        }}>Add Movie</Button>
+        }}>Edit Movie</Button>
       </section>
     )
 }
