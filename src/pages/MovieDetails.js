@@ -1,34 +1,48 @@
+import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-function MovieDetails({movies}) {
-    console.log(movies);
-    const {id} = useParams()
-    console.log(id);
-    let fdMovie  =  movies.filter(function(movie){
-        return movie.id === parseInt(id)
-    })
-
-    // const name = "Movie Name"
-    // const summary = "Plot"
-    // const poster = "URL"
-    const name = fdMovie[0]['title']
-    const rating = fdMovie[0]['rating']
-    const year = fdMovie[0]['year']
-    const summary = fdMovie[0]['plot']
-    const poster = fdMovie[0]['posterUrl']
-    
+function MovieDetails() {
     const history = useHistory()
-    console.log(history)
+    // console.log(history)
+    
+    const [moviedetails, setMovieDetails] = useState({
+        "id": "",
+        "title": "",
+        "year": "",
+        "rating": "",
+        "plot": "",
+        "poster": "",
+        "trailer": "",
+    });
+
+    const {id} = useParams()
+    // console.log(id);
+
+    
+    const url = "https://618fa735f6bf4500174849a5.mockapi.io/movies/"
+    
+    const loadMovie = () => {
+        
+        fetch(url+id, {method: "GET"})
+        .then(data => data.json())
+        .then((mvs) => setMovieDetails(mvs))
+    }
+    
+    useEffect(loadMovie, [])
+
+    console.log(moviedetails); 
+    
    
     return (
         <div className='MovieDetails'>
-            <h1>{name}</h1>
-            <p>{rating}</p>
-            <p>{year}</p>
-            <p>{summary}</p>
-            <img src={poster} />
+            <h1>{moviedetails.title}</h1>
+            <p>{moviedetails.rating}</p>
+            <iframe width="560" height="315" src={moviedetails.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>{moviedetails.year}</p>
+            <p>{moviedetails.plot}</p>
+            <img src={moviedetails.poster} />
             <Button variant="outlined" 
                 startIcon={<ArrowBackIosIcon />}
                     onClick={()=>{

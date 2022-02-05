@@ -6,38 +6,50 @@ import { useHistory } from 'react-router-dom'
 
 function AddMovies({movieList, setMovieList}){
     const history = useHistory()
-    const [movieTitle, setMovieTitle] = useState("");
-    const [movieRating, setMovieRating] = useState("");
-    const [movieYear, setMovieYear] = useState("");
-    const [moviePlot, setMoviePlot] = useState("");
-    const [movieimg, setMovieimg] = useState("");
+
+    const [newMovie, setNewMovie] = useState({
+        "title": "",
+        "year": "",
+        "rating": "",
+        "plot": "",
+        "poster": "",
+        "trailer": "",
+    });
+
+    const { title, year, rating, plot, poster, trailer } = newMovie;
+
+    const onInputChange = (e) => {
+      setNewMovie({...newMovie, [e.target.name]: e.target.value})
+    }
+
+    const url = "https://618fa735f6bf4500174849a5.mockapi.io/movies/"
+    const onSubmit = (e) => {
+      e.preventDefault();
+      console.log(newMovie);
+      fetch(url, {method: "POST", headers: {
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin" : "*", 
+                "Access-Control-Allow-Credentials" : true 
+            }, body: JSON.stringify(newMovie)})
+        .then(data => data.json())
+        .then(data => {
+            console.log('Success:', data);
+          })
+      history.push("/movies");
+    };
     return (
         <section className='form-section'>
+          <h1>Add Movie</h1>
         <div className='forms'>
-          <TextField label="Name" variant="outlined" type="text" placeholder='Name' value={movieTitle} onChange={(e) => setMovieTitle(e.target.value)} />
-          <TextField label="Rating" variant="outlined" type="text" placeholder='Rating' value={movieRating} onChange={(e) => setMovieRating(e.target.value)} />
-          <TextField label="Year" variant="outlined" type="text" placeholder='Year' value={movieYear} onChange={(e) => setMovieYear(e.target.value)} />
+              <TextField label="Name" variant="outlined" type="text" placeholder='Name' name="title" onChange={e => onInputChange(e)} value={title} /> 
+              <TextField label="Rating" variant="outlined" type="text" placeholder='Rating' name="rating" onChange={e => onInputChange(e)} value={rating} />
+              <TextField label="Year" variant="outlined" type="text" placeholder='Year' name="year" onChange={e => onInputChange(e)} value={year} />
+              <TextField label="Plot" variant="outlined" type="text" placeholder='Plot' name="plot" onChange={e => onInputChange(e)} value={plot}/>
+              <TextField label="Poster" variant="outlined" type="text" placeholder='Poster' name="poster" onChange={e => onInputChange(e)} value={poster} />
+              <TextField label="Trailer" variant="outlined" type="text" placeholder='Trailer' name="trailer" onChange={e => onInputChange(e)} value={trailer}  /> 
         </div>
-        <div className='forms'>
-          <TextField label="Plot" variant="outlined" type="text" placeholder='Plot' value={moviePlot} onChange={(e) => setMoviePlot(e.target.value)} />
-          <TextField label="Poster" variant="outlined" type="text" placeholder='Poster' value={movieimg} onChange={(e) => setMovieimg(e.target.value)} />
-        </div>
-        <br />
-        <Button variant="contained" onClick={(e) => {
-          let newMovie = {
-            id: movieList.length + 1,
-            title: movieTitle,
-            year: movieYear,
-            rating: movieRating,
-            plot: moviePlot,
-            posterUrl: movieimg
-          }
-          setMovieList([...movieList, newMovie])
-          console.log(newMovie);
-          console.log(movieList);
-          history.push("/movies")
-
-        }}>Add Movie</Button>
+        
+        <Button variant="contained" onClick={(e) => onSubmit(e)}>Add Movie</Button>
       </section>
     )
 }

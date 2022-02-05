@@ -5,27 +5,21 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 
-function CrudBtns({id, movies, setMovieList}) {
+function CrudBtns({id, movies, setMovieList, getMovies}) {
     const history = useHistory()
     
     return (
         <div>
-
-
             <IconButton color="primary" onClick={()=>{
                 history.push("/edit/"+id)}} aria-label="expand" >
                 <EditIcon />
             </IconButton>
             <IconButton color="primary" onClick={()=>{
-                console.log("CRUDOPS", id);
-                console.log("CRUDOPS", movies);
-                let updatedList = movies.filter(function(obj){
-                    return obj.id !== id
-                })
-                console.log(updatedList);
-                setMovieList(updatedList)
+                const url = "https://618fa735f6bf4500174849a5.mockapi.io/movies/"
+                fetch(url+id, {method: "DELETE"})
+                .then(data => data.json())
+                .then(() => getMovies())
                 history.push("/movies")
-                // alert("Delete")
             }} aria-label="expand" >
                 <DeleteIcon />
             </IconButton>

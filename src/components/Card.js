@@ -1,3 +1,4 @@
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -8,7 +9,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function Card({ name, rating, year, plot, img, id, movies, setMovieList }) {
+function Card({ name, rating, year, plot, img, id, movies, setMovieList, getMovies }) {
 
     const history = useHistory();
     const [isDescriptionOn, setDescription] = useState(false)
@@ -29,11 +30,6 @@ function Card({ name, rating, year, plot, img, id, movies, setMovieList }) {
                     }}>
                         {isDescriptionOn ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                     </IconButton>
-                    <IconButton color="primary" aria-label="expand" onClick={(e) => {
-                        history.push("/movies/"+id)
-                    }}>
-                        <InfoIcon />
-                    </IconButton>
                 </h2>
 
                 <Metadata rating={rating} year={year} />
@@ -42,9 +38,11 @@ function Card({ name, rating, year, plot, img, id, movies, setMovieList }) {
 
                 <div className='crud-ops'>
                     <Counter />
-                    <CrudBtns id={id} movies={movies} setMovieList={setMovieList} />
+                    <CrudBtns id={id} movies={movies} setMovieList={setMovieList} getMovies={getMovies} />
                 </div>
-
+                <Button className='see-details' variant="contained" onClick={(e) => {
+                        history.push("/movies/"+id)
+                    }}>See Details&nbsp;<InfoIcon /></Button>
             </div>
         </div>
     )

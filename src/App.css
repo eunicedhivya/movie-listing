@@ -10,25 +10,39 @@
   box-sizing: border-box;
 }
 
-.main-menu {
+.siteheader {
+  background-color: #0184ff;
   display: flex;
-  list-style: none;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+  justify-content: space-between;
+  color: #fff;
+  padding: 15px 30px;
+  box-sizing: border-box;
 }
 
+.main-menu li {
+  display: inline-block;
+}
 .main-menu a {
   text-decoration: none;
-
   padding: 5px 10px;
-  color: #0184ff;
+  color: #fff;
+  display: flex;
+  align-items: center;
 }
 
 .main-menu .addOp {
   background-color: #0184ff;
   color: #fff;
+  display: flex;
+  align-items: center;
+}
+.main-menu .addOp svg {
+  margin-left: 10px;
+}
+
+.main-menu a.active {
+  color: #6fc4ed;
+  font-weight: bold;
 }
 
 h1 {
@@ -68,7 +82,7 @@ h1 {
   width: 100%;
   bottom: 0px;
   text-align: left;
-  padding: 15px;
+  padding: 15px 15px 45px 15px;
   box-sizing: border-box;
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -189,6 +203,20 @@ button span {
 .crud-ops {
   display: flex;
   justify-content: space-between;
+}
+
+.see-details.MuiButton-root {
+  width: 100%;
+  left: 0;
+  position: absolute;
+  bottom: 0;
+  border-radius: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.MuiAppBar-root {
+  min-height: 40px;
 }
 
 @media (max-width: 767px) {
