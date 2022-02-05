@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import Icon from '@mui/material/Icon';
 
 function MovieDetails() {
     const history = useHistory()
@@ -37,19 +38,29 @@ function MovieDetails() {
    
     return (
         <div className='MovieDetails'>
-            <h1>{moviedetails.title}</h1>
-            <p>{moviedetails.rating}</p>
-            <iframe width="560" height="315" src={moviedetails.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <p>{moviedetails.year}</p>
-            <p>{moviedetails.plot}</p>
-            <img src={moviedetails.poster} />
-            <Button variant="outlined" 
+            <div className='sidebar'>
+                <img src={moviedetails.poster} />
+            </div>
+            <div className='maincontent'>
+                <div className='movieheader'>
+                    <h2>{moviedetails.title}</h2>
+                <div>
+                <Button variant="outlined" 
                 startIcon={<ArrowBackIosIcon />}
                     onClick={()=>{
                         history.push("/movies/")
                     }}>
                 Go Back
-            </Button>
+                </Button>
+            </div>
+        </div>
+            <p>Rating: <Icon>star</Icon> {moviedetails.rating} | Year: {moviedetails.year}</p>
+            <iframe width="560" height="315" src={moviedetails.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+            <p>{moviedetails.plot}</p>
+            
+            
+            </div>
         </div>
     )
 }

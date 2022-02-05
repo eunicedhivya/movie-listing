@@ -219,6 +219,30 @@ button span {
   min-height: 40px;
 }
 
+.MovieDetails {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px auto;
+  column-gap: 20px;
+}
+.MovieDetails .sidebar {
+  width: 20%;
+}
+.MovieDetails .sidebar img {
+  width: 100%;
+}
+.MovieDetails .maincontent {
+  width: 80%;
+}
+.MovieDetails .movieheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
 @media (max-width: 767px) {
   .movie-list {
     grid-template-columns: 100%;
