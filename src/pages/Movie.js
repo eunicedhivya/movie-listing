@@ -14,7 +14,7 @@ function Movie() {
     .then((mvs) => setMovieList(mvs))
   }
   
-  useEffect(getMovies, [])
+  useEffect(() => getMovies(), [])
   
   // const [movieTitle, setMovieTitle] = useState("");
   // const [movieRating, setMovieRating] = useState("");

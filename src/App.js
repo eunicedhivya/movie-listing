@@ -10,35 +10,29 @@ import EditMovies from "./pages/EditMovies";
 import Notfound from './pages/Notfound';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HomeIcon from '@mui/icons-material/Home';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import { useHistory } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
-const context = createContext();
+// const context = createContext();
 
 function App() {
-
+  const history = useHistory();
   const [mode, setMode] = useState("light");
-
-  // Call the API when the component is mounted
   
   return (
     <div className="App">
-      <context.Provider value={{mode, setMode}}>
-      <header className='siteheader'> <ul className='main-menu'>
-        <li>
-          <NavLink  to="/" exact activeClassName="active">Home</NavLink >
-        </li>
-        <li>
-          <NavLink  to="/movies" exact activeClassName="active">Movies</NavLink >
-        </li>
-        {/* <li>
-          <NavLink  to="/films" exact activeClassName="active">Films</NavLink >
-        </li> */}
-      </ul>
-       <ul className='main-menu'>
-        <li>
-          <NavLink  className='addOp' to="/add" exact activeClassName="active"> Add Movies <AddCircleOutlineIcon /> </NavLink >
-        </li>
-      </ul></header>
-      <hr />
+        <AppBar position="static">
+          <Toolbar>
+            <Box>
+              <Button color="inherit" onClick={()=>history.push('/')}>Home</Button>
+              <Button color="inherit" onClick={()=>history.push('/movies')}>Movies</Button>
+            </Box>
+            <Button color="inherit" onClick={()=>history.push('/add')}>Add Movies <AddCircleOutlineIcon /></Button> 
+          </Toolbar>
+        </AppBar>
        <Switch>
         {/* Each route is case, eg. - case '/about': */}
         <Route path="/films">
@@ -58,7 +52,6 @@ function App() {
         <Route exact path="/"> <Home /> </Route>
         <Route path="**"> <Notfound /> </Route>
       </Switch>
-      </context.Provider>
     </div>
   );
 }
