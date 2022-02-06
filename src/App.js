@@ -8,6 +8,7 @@ import MovieDetails from './pages/MovieDetails';
 import AddMovies from "./pages/AddMovies";
 import EditMovies from "./pages/EditMovies";
 import Notfound from './pages/Notfound';
+import BasicForm from './components/BasicForm';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HomeIcon from '@mui/icons-material/Home';
 import AppBar from '@mui/material/AppBar';
@@ -29,6 +30,7 @@ function App() {
             <Box>
               <Button color="inherit" onClick={()=>history.push('/')}>Home</Button>
               <Button color="inherit" onClick={()=>history.push('/movies')}>Movies</Button>
+              <Button color="inherit" onClick={()=>history.push('/basic-form')}>Basic Form</Button>
             </Box>
             <Button color="inherit" onClick={()=>history.push('/add')}>Add Movies <AddCircleOutlineIcon /></Button> 
           </Toolbar>
@@ -48,6 +50,7 @@ function App() {
           <EditMovies />
         </Route>
         <Route path="/movies"> <Movie /> </Route>
+        <Route path="/basic-form"> <BasicForm /> </Route>
         <Route path="/colorbox"> <Colorbox /> </Route>
         <Route exact path="/"> <Home /> </Route>
         <Route path="**"> <Notfound /> </Route>
