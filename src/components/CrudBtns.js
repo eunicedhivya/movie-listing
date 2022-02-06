@@ -19,7 +19,7 @@ function CrudBtns({id, movies, setMovieList, getMovies}) {
                 fetch(url+id, {method: "DELETE"})
                 .then(data => data.json())
                 .then(() => getMovies())
-                history.push("/movies")
+                .then(() => history.push("/movies"))
             }} aria-label="expand" >
                 <DeleteIcon />
             </IconButton>

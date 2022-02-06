@@ -34,8 +34,9 @@ function AddMovies({movieList, setMovieList}){
         .then(data => data.json())
         .then(data => {
             console.log('Success:', data);
-          })
-      history.push("/movies");
+            history.push("/movies");
+        })
+      
     };
     return (
         <section className='form-section'>

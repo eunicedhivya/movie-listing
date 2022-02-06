@@ -42,10 +42,9 @@ import { useParams, useHistory } from 'react-router-dom'
         .then(data => data.json())
         .then(data => {
             console.log('Success:', data);
-            
+            history.push("/movies");
           })
-      history.push("/movies")
-      loadMovie()
+      
     };
 
     useEffect(loadMovie, [])
