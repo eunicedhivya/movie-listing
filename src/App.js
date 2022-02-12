@@ -7,6 +7,7 @@ import Movie from './pages/Movie';
 import MovieDetails from './pages/MovieDetails';
 import AddMovies from "./pages/AddMovies";
 import EditMovies from "./pages/EditMovies";
+import ReducerTask from "./pages/ReducerTask";
 import Notfound from './pages/Notfound';
 import BasicForm from './components/BasicForm';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -52,6 +53,7 @@ function App() {
         <Route path="/movies"> <Movie /> </Route>
         <Route path="/basic-form"> <BasicForm /> </Route>
         <Route path="/colorbox"> <Colorbox /> </Route>
+        <Route path="/reducertask"> <ReducerTask /> </Route>
         <Route exact path="/"> <Home /> </Route>
         <Route path="**"> <Notfound /> </Route>
       </Switch>

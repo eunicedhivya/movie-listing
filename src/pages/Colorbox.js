@@ -24,39 +24,52 @@ function newColor(color){
 
 
 function AddBox() {
-    const [colors, dispatch] = useReducer(reducer, [])
-    console.log(colors);
-    
-    const [color, setColor] = useState('');
+  const [color, setColor] = useState('pink');
+  const styles = { backgroundColor: color };
+  const [colorList, setColorList] = useState(['teal', 'blue', 'orange'])
+  const [movieList, setMovieList] = useState([]);
   return (
     <div className="container">
       <h1>Colorbox</h1>
-      <input
-          style={{backgroundColor: color}}
+      <div className='inputSection'>
+        <input
+          style={styles}
           value={color}
           onChange={(e) => {
+            console.log(e.target.value);
             setColor(e.target.value);
-          }} />
-
+          }}
+          placeholder='Enter a color' /> <br />
         <button onClick={
-          (e) => {
-            dispatch({ type: "add-todo", payload: {color: color}});
-            // setColor('');
-            setColor(color);
+          () => {
+            // setMovieList([...movieList,]);
+            setColorList([...colorList, color]);
           }
         }>Add Color</button>
-        <div className='colorList'>
-            {
-            colors.map(function(item, id){
-                console.log(item.color, id);
-                return <ColorDiv key={item.id} clr={item.color} />
-            })
-        }
-        </div>
+      </div>
+      {
+        colorList.map(function (item, id) {
+          // console.log(item, id);
+          return <ColorDiv key={id} clr={item} />
+        })
+      }
     </div>
 
   )
 }
+
+// function ColorBox({ clr }) {
+//   const styles = {
+//     backgroundColor: clr,
+//     height: '25px',
+//     width: '93%',
+//     margin: '10px auto 0 auto'
+//   }
+//   return (
+//     <div style={styles}></div>
+//   )
+
+// }
 
 function ColorDiv({ clr }) {
   const styles = {
