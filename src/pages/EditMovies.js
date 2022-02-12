@@ -45,7 +45,7 @@ import { useFormik } from 'formik'
         .then(data => {
             console.log('Success:', data);
             history.push("/movies");
-          })
+        })
       
     };
 

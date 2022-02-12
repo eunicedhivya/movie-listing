@@ -25,21 +25,7 @@ function AddMovies({movieList, setMovieList}){
     // }
 
     const url = "https://618fa735f6bf4500174849a5.mockapi.io/movies/"
-    // const onSubmit = (e) => {
-    //   e.preventDefault();
-    //   console.log(newMovie);
-    //   fetch(url, {method: "POST", headers: {
-    //             'Content-Type': 'application/json',
-    //             "Access-Control-Allow-Origin" : "*", 
-    //             "Access-Control-Allow-Credentials" : true 
-    //         }, body: JSON.stringify(newMovie)})
-    //     .then(data => data.json())
-    //     .then(data => {
-    //         console.log('Success:', data);
-    //         history.push("/movies");
-    //     })
-      
-    // };
+    
     const formValidationSchema = Yup.object({
         title: Yup
           .string()
@@ -95,16 +81,6 @@ function AddMovies({movieList, setMovieList}){
     return (
         <section className='form-section'>
           <h1>Add Movie</h1>
-        {/* <div className='forms'>
-              <TextField label="Name" variant="outlined" type="text" placeholder='Name' name="title" onChange={e => onInputChange(e)} value={title} /> 
-              <TextField label="Rating" variant="outlined" type="text" placeholder='Rating' name="rating" onChange={e => onInputChange(e)} value={rating} />
-              <TextField label="Year" variant="outlined" type="text" placeholder='Year' name="year" onChange={e => onInputChange(e)} value={year} />
-              <TextField label="Plot" variant="outlined" type="text" placeholder='Plot' name="plot" onChange={e => onInputChange(e)} value={plot}/>
-              <TextField label="Poster" variant="outlined" type="text" placeholder='Poster' name="poster" onChange={e => onInputChange(e)} value={poster} />
-              <TextField label="Trailer" variant="outlined" type="text" placeholder='Trailer' name="trailer" onChange={e => onInputChange(e)} value={trailer}  /> 
-        </div>
-        
-        <Button variant="contained" onClick={(e) => onSubmit(e)}>Add Movie</Button> */}
         <form onSubmit={formik.handleSubmit}>
             <TextField label="title" value={formik.values.title} variant="outlined" type="text" name="title" onChange={formik.handleChange} 
             onBlur={formik.handleBlur} error={formik.touched.title && Boolean(formik.errors.title)}/>            
