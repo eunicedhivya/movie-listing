@@ -13,13 +13,13 @@ const reducer = (state, action) => {
     console.log(state, action)
     switch (action.type){
         case "increment":
-            return { count: state.count + 1}
+            return { count: state.count + 1, color: state.color}
         case "decrement":
-            return { count: state.count - 1}
+            return { count: state.count - 1, color: state.color}
         case "reset":
             return { count: 0, color: ''}
         case "change-color":
-            return { color: action.payload }
+            return { count: state.count, color: action.payload }
         default:
             return state;
     }
@@ -39,7 +39,7 @@ function Counter(){
                 onChange={(e) => {
                     console.log(e.target.value);
                     dispatch({ type: "change-color", payload:e.target.value })
-                }} />
+                }} /> <br /><br />
             <p>{state.count}</p>
             <button onClick={()=>dispatch({ type: "increment" })}>+</button>
             <button onClick={()=>dispatch({ type: "reset" })}>Reset</button>

@@ -31,6 +31,7 @@ function App() {
             <Box>
               <Button color="inherit" onClick={()=>history.push('/')}>Home</Button>
               <Button color="inherit" onClick={()=>history.push('/movies')}>Movies</Button>
+              <Button color="inherit" onClick={()=>history.push('/reducertask')}>Reducer Task</Button>
               <Button color="inherit" onClick={()=>history.push('/basic-form')}>Basic Form</Button>
             </Box>
             <Button color="inherit" onClick={()=>history.push('/add')}>Add Movies <AddCircleOutlineIcon /></Button> 
