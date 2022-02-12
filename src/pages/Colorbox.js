@@ -8,35 +8,51 @@ function Colorbox() {
     )
 }
 
+function reducer(colors, action){
+    switch (action.type){
+        case "add-todo":
+            return [...colors, newColor(action.payload.color)]
+        case "change-color":
+            return newColor(action.payload.color)
+    }
+}
+
+function newColor(color){
+    return { id:Date.now(), color:color}
+}
+
+
+
 function AddBox() {
-  const [color, setColor] = useState('pink');
-  const styles = { backgroundColor: color };
-  const [colorList, setColorList] = useState(['teal', 'blue', 'orange'])
+    const [colors, dispatch] = useReducer(reducer, [])
+    console.log(colors);
+    
+    const [color, setColor] = useState('');
   return (
     <div className="container">
       <h1>Colorbox</h1>
-      <div className='inputSection'>
-        <input
-          style={styles}
+      <input
+          style={{backgroundColor: color}}
           value={color}
           onChange={(e) => {
-            console.log(e.target.value);
             setColor(e.target.value);
-          }}
-          placeholder='Enter a color' /> <br />
+          }} />
+
         <button onClick={
-          () => {
-            // setMovieList([...movieList,]);
-            setColorList([...colorList, color]);
+          (e) => {
+            dispatch({ type: "add-todo", payload: {color: color}});
+            // setColor('');
+            setColor(color);
           }
         }>Add Color</button>
-      </div>
-      {
-        colorList.map(function (item, id) {
-          // console.log(item, id);
-          return <ColorDiv key={id} clr={item} />
-        })
-      }
+        <div className='colorList'>
+            {
+            colors.map(function(item, id){
+                console.log(item.color, id);
+                return <ColorDiv key={item.id} clr={item.color} />
+            })
+        }
+        </div>
     </div>
 
   )
@@ -46,7 +62,7 @@ function ColorDiv({ clr }) {
   const styles = {
     backgroundColor: clr,
     height: '25px',
-    width: '93%',
+    width: '150px',
     margin: '10px auto 0 auto'
   }
   return (
