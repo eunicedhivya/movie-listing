@@ -3,6 +3,13 @@
   margin: 0;
 }
 
+.bgFullScreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -241,6 +248,38 @@ button span {
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
+}
+
+.reducer-task {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.reducer-task .inputbox input {
+  padding: 5px 20px;
+  width: 60%;
+  margin: 0 auto;
+  transition: all 0.5s;
+}
+.reducer-task .inputbox {
+  margin-bottom: 15px;
+}
+.reducer-task p {
+  font-size: 36px;
+  width: 60%;
+  margin: 0 auto 15px auto;
+  transition: all 0.5s;
+}
+.reducer-task button {
+  background-color: #000;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+}
+.reducer-task button:first-child {
+  margin-left: 0;
 }
 
 @media (max-width: 767px) {

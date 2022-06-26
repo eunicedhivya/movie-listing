@@ -13,13 +13,13 @@ const reducer = (state, action) => {
     console.log(state, action)
     switch (action.type){
         case "increment":
-            return { count: state.count + 1, color: state.color}
+            return {...state, count: state.count + 1}
         case "decrement":
-            return { count: state.count - 1, color: state.color}
+            return {...state, count: state.count - 1}
         case "reset":
-            return { count: 0, color: ''}
+            return initailState;
         case "change-color":
-            return { count: state.count, color: action.payload }
+            return { ...state, color: action.payload };
         default:
             return state;
     }
@@ -32,15 +32,17 @@ function Counter(){
     const [state, dispatch] = useReducer(reducer, initailState)
     console.log(state);
     return (
-        <div>
-            <input
+        <div className='reducer-task'>
+            <div className='inputbox'>
+                <input
                 style={{backgroundColor:state.color}}
                 value={state.color}
                 onChange={(e) => {
                     console.log(e.target.value);
                     dispatch({ type: "change-color", payload:e.target.value })
-                }} /> <br /><br />
-            <p>{state.count}</p>
+                }} />
+            </div>
+            <p style={{color:state.color}}>{state.count}</p>
             <button onClick={()=>dispatch({ type: "increment" })}>+</button>
             <button onClick={()=>dispatch({ type: "reset" })}>Reset</button>
             <button onClick={()=>dispatch({ type: "decrement" })}>-</button>
